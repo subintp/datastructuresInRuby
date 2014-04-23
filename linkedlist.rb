@@ -23,25 +23,29 @@ class Linkedlist
 	end
 
 
-	def insert_first(data) 
+	def insert(data)
 		if @head.nil?
 			insert_head(data)			
 		else
 			node = Node.new(data)	
-			node.next = @head
-			@head = node
-			@length += 1			
-		end		
+			yield node
+			@length += 1
+		end
+
 	end
 
-	def insert_last(data) 
-		if @head.nil?
-			insert_head(data)			
-		else
-			node = Node.new(data)			
+
+	def insert_first(data)
+		insert(data) do |node|
+			node.next = @head
+			@head = node
+		end			
+	end
+
+	def insert_last(data)
+		insert(data) do |node|
 			@tail.next = node
 			@tail = node
-			@length += 1
 		end		
 	end
 
