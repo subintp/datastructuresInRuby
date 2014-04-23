@@ -23,7 +23,7 @@ class Linkedlist
 	end
 
 
-	def insert(data)
+	def insert_node(data)
 		if @head.nil?
 			insert_head(data)			
 		else
@@ -36,14 +36,14 @@ class Linkedlist
 
 
 	def insert_first(data)
-		insert(data) do |node|
+		insert_node(data) do |node|
 			node.next = @head
 			@head = node
 		end			
 	end
 
 	def insert_last(data)
-		insert(data) do |node|
+		insert_node(data) do |node|
 			@tail.next = node
 			@tail = node
 		end		
