@@ -12,10 +12,8 @@ class Linkedlist
 
 	attr_accessor :head,:tail,:length	
 
-	def initialize(data)
-		if !data.nil?
-			insert_head(data)			
-		end		
+	def initialize(data)		
+		insert_head(data) if !data.nil?				
 	end
 
 	def insert_head(data)
