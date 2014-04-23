@@ -13,17 +13,21 @@ class Linkedlist
 	attr_accessor :head,:tail,:length	
 
 	def initialize(data)
-		@head = Node.new(data) if !data.nil?
+		if !data.nil?
+			insertFirstTime(data)			
+		end		
+	end
+
+	def insertFirstTime(data)
+		@head = Node.new(data) 
 		@tail = @head
-		@length = 1		
+		@length = 1
 	end
 
 
 	def insertFirst(data) 
 		if @head.nil?
-			@head = Node.new(data) 
-			@tail = @head
-			@length = 1	
+			insertFirstTime(data)			
 		else
 			node = Node.new(data)	
 			node.next = @head
@@ -34,9 +38,7 @@ class Linkedlist
 
 	def insertLast(data) 
 		if @head.nil?
-			@head =  Node.new(data) 
-			@tail = @head
-			@length = 1
+			insertFirstTime(data)			
 		else
 			node = Node.new(data)			
 			@tail.next = node
