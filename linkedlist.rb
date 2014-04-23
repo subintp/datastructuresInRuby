@@ -14,20 +14,20 @@ class Linkedlist
 
 	def initialize(data)
 		if !data.nil?
-			insertFirstTime(data)			
+			insert_head(data)			
 		end		
 	end
 
-	def insertFirstTime(data)
+	def insert_head(data)
 		@head = Node.new(data) 
 		@tail = @head
 		@length = 1
 	end
 
 
-	def insertFirst(data) 
+	def insert_first(data) 
 		if @head.nil?
-			insertFirstTime(data)			
+			insert_head(data)			
 		else
 			node = Node.new(data)	
 			node.next = @head
@@ -36,9 +36,9 @@ class Linkedlist
 		end		
 	end
 
-	def insertLast(data) 
+	def insert_last(data) 
 		if @head.nil?
-			insertFirstTime(data)			
+			insert_head(data)			
 		else
 			node = Node.new(data)			
 			@tail.next = node
@@ -75,7 +75,7 @@ class Linkedlist
 		@head
 	end
 
-	def getAllData
+	def get_all_data
 		listData = Array.new
 		node = @head
 		while node != nil do
@@ -85,7 +85,7 @@ class Linkedlist
 		listData
 	end
 
-	def printAll
+	def print_all
 		temp = @head
 		while temp != nil do
 			puts temp.data
