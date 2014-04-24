@@ -10,7 +10,15 @@ end
 
 class Linkedlist
 
-	attr_accessor :head,:tail,:length	
+	attr_accessor :head,:tail,:length
+
+	def each
+		node = @head
+		while node != nil do
+			yield node.data
+			node = node.next
+		end
+	end	
 
 	def initialize(data)		
 		insert_head(data) if !data.nil?				
@@ -20,7 +28,6 @@ class Linkedlist
 		@head = Node.new(data) 
 		@tail = @head		
 	end
-
 
 	def insert_node(data)
 		if @head.nil?
