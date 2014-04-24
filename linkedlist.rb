@@ -10,40 +10,47 @@ end
 
 class Linkedlist
 
-	attr_accessor :head,:tail,:length	
+	attr_accessor :head,:tail,:length
 
-	def initialize(data)
-		if !data.nil?
-			insert_head(data)			
-		end		
+	def each
+		node = @head
+		while node != nil do
+			yield node.data if block_given?
+			node = node.next
+		end
+	end	
+
+	def initialize(data)		
+		insert_head(data) if !data.nil?				
 	end
 
 	def insert_head(data)
 		@head = Node.new(data) 
-		@tail = @head
-		@length = 1
+		@tail = @head		
 	end
 
-
-	def insert_first(data) 
+	def insert_node(data)
 		if @head.nil?
 			insert_head(data)			
 		else
 			node = Node.new(data)	
-			node.next = @head
-			@head = node
-			@length += 1			
-		end		
+			yield node			
+		end
+
 	end
 
-	def insert_last(data) 
-		if @head.nil?
-			insert_head(data)			
-		else
-			node = Node.new(data)			
+
+	def insert_first(data)
+		insert_node(data) do |node|
+			node.next = @head
+			@head = node
+		end			
+	end
+
+	def insert_last(data)
+		insert_node(data) do |node|
 			@tail.next = node
 			@tail = node
-			@length += 1
 		end		
 	end
 
@@ -67,8 +74,10 @@ class Linkedlist
 		end
 	end
 
-	def length
-		@length
+	def length	
+		length = 0
+		self.each{ |n| length += 1}	
+		length		
 	end
 
 	def head
@@ -76,20 +85,12 @@ class Linkedlist
 	end
 
 	def get_all_data
-		listData = Array.new
-		node = @head
-		while node != nil do
-			listData << node.data
-			node = node.next
-		end
-		listData
+		list_data = Array.new
+		self.each{ |n| list_data << n}			
+		list_data
 	end
 
 	def print_all
-		temp = @head
-		while temp != nil do
-			puts temp.data
-			temp = temp.next
-		end
+		self.each{ |n| puts n }		
 	end
 end
