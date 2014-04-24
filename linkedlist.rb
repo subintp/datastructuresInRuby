@@ -15,7 +15,7 @@ class Linkedlist
 	def each
 		node = @head
 		while node != nil do
-			yield node.data
+			yield node.data if block_given?
 			node = node.next
 		end
 	end	
@@ -74,13 +74,9 @@ class Linkedlist
 		end
 	end
 
-	def length
-		node = @head
-		length = 0			
-			while node != nil do
-				length += 1
-				node = node.next
-			end
+	def length	
+		length = 0
+		self.each{ |n| length += 1}	
 		length		
 	end
 
@@ -89,20 +85,12 @@ class Linkedlist
 	end
 
 	def get_all_data
-		listData = Array.new
-		node = @head
-		while node != nil do
-			listData << node.data
-			node = node.next
-		end
-		listData
+		list_data = Array.new
+		self.each{ |n| list_data << n}			
+		list_data
 	end
 
 	def print_all
-		temp = @head
-		while temp != nil do
-			puts temp.data
-			temp = temp.next
-		end
+		self.each{ |n| puts n }		
 	end
 end
