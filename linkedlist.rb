@@ -18,8 +18,7 @@ class Linkedlist
 
 	def insert_head(data)
 		@head = Node.new(data) 
-		@tail = @head
-		@length = 1
+		@tail = @head		
 	end
 
 
@@ -28,8 +27,7 @@ class Linkedlist
 			insert_head(data)			
 		else
 			node = Node.new(data)	
-			yield node
-			@length += 1
+			yield node			
 		end
 
 	end
@@ -70,7 +68,13 @@ class Linkedlist
 	end
 
 	def length
-		@length
+		node = @head
+		length = 0			
+			while node != nil do
+				length += 1
+				node = node.next
+			end
+		length		
 	end
 
 	def head
